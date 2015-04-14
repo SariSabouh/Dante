@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class generator {
-	int number = 0000;
+	int number = 0500;
 	String oldFile = "";
 	String output = "";
 	String oldOutput = "";
@@ -23,7 +23,7 @@ public class generator {
 		BufferedReader file = new BufferedReader(new FileReader(new File("All Serials.txt")));
 		String line;
 		while ((line = file.readLine()) != null) {
-			oldFile += line + "\n";
+			oldFile += line + "\r\n";
 	       char[] lastLine = line.toCharArray();
 	       if(!line.equals("")) lastNumber = "" + lastLine[6] + lastLine[7] + lastLine[8] + lastLine[9];  
 		}
@@ -32,9 +32,9 @@ public class generator {
 	}
 	
 	public int addNumber(int num){
-		if(num < 500) return num;
-		else if(num == 500){
-			number = 0;
+		if(num < 1000) return num;
+		else if(num == 1000){
+			number = 500;
 			return num;
 		}
 		else{
@@ -49,10 +49,11 @@ public class generator {
 		readFile();
 		number = Integer.parseInt(lastNumber);
 		for(int i = 0; i<Integer.parseInt(amount); i++){
-			if(number>=0 && number<9) output += mm + dd + yy + "000" + addNumber(number+i+1) + "\r\n";
-			else if(number>8 && number<99) output += mm + dd + yy + "00" + addNumber(number+i+1) + "\r\n";
-			else if(number>98 && number<1000) output += mm + dd + yy + "0" + addNumber(number+i+1) + "\r\n";
-			else output += mm + dd + yy + addNumber(number+i+1) + "\r\n";
+			number = number+1;
+			if(number>=0 && number<10) output += mm + dd + yy + "000" + addNumber(number) + "\r\n";
+			else if(number>9 && number<100) output += mm + dd + yy + "00" + addNumber(number) + "\r\n";
+			else if(number>99 && number<1000) output += mm + dd + yy + "0" + addNumber(number) + "\r\n";
+			else output += mm + dd + yy + addNumber(number) + "\r\n";
 		}
 		FileWriter write = new FileWriter("New Serials.txt");
 		FileWriter write2 = new FileWriter("All Serials.txt");

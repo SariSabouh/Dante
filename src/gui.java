@@ -62,8 +62,8 @@ public class gui extends JFrame {
 	 * @throws IOException 
 	 */
 	public gui() throws IOException {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sari\\Documents\\Eclipse\\Dante\\spoc icon.png"));
-		setTitle("Power Rangers Serial# Generator");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\SabouhS\\Documents\\Dante\\trunk\\spoc icon.png"));
+		setTitle("GENESIS Serial# Generator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 262, 279);
 		contentPane = new JPanel();
@@ -76,10 +76,10 @@ public class gui extends JFrame {
 		panel.setLayout(new CardLayout(0, 0));
 		
 		imageLabel = new JLabel("");
-		imageLabel.setIcon(new ImageIcon("C:\\Users\\Sari\\Documents\\Eclipse\\Dante\\spoc.png"));
+		imageLabel.setIcon(new ImageIcon("C:\\Users\\SabouhS\\Documents\\Dante\\trunk\\spoc.png"));
 		panel.add(imageLabel, "name_1382540049281029");
 		
-		lblPowerRangers = new JLabel("\u01A4\u01A0\u019C\u0404\u01A6 \u01A6\u019B\u019D\u0193\u0404\u01A6\u01A7");
+		lblPowerRangers = new JLabel("GENESIS");
 		contentPane.add(lblPowerRangers, "cell 2 4,aligny center");
 		
 		amountLabel = new JLabel("Amount:");
@@ -104,7 +104,7 @@ public class gui extends JFrame {
 
 			        Calendar cal = Calendar.getInstance();
 			        
-			        int mm = cal.get(Calendar.MONTH);
+			        int mm = cal.get(Calendar.MONTH)+1;
 			        String month = "0";
 			        if (mm < 10) month += mm;
 			        else month = "" + mm;

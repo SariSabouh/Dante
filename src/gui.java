@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,17 +12,16 @@ import java.awt.CardLayout;
 
 import javax.swing.JLabel;
 
+
 import net.miginfocom.swing.MigLayout;
 
+import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 
 public class gui extends JFrame {
@@ -35,7 +35,7 @@ public class gui extends JFrame {
 	private JLabel amountLabel;
 	private JLabel amountEx;
 	private JLabel lblPowerRangers;
-	private JButton count;
+	private static JButton count;
 	private JPanel panel;
 	private JLabel imageLabel;
 	private String amount;
@@ -50,6 +50,7 @@ public class gui extends JFrame {
 				try {
 					gui frame = new gui();
 					frame.setVisible(true);
+					frame.getRootPane().setDefaultButton(count);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,8 +63,8 @@ public class gui extends JFrame {
 	 * @throws IOException 
 	 */
 	public gui() throws IOException {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\SabouhS\\Documents\\Dante\\trunk\\spoc icon.png"));
-		setTitle("GENESIS Serial# Generator");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("spoc icon.png"));
+		setTitle("Genesis Serial# Generator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 262, 279);
 		contentPane = new JPanel();
@@ -76,7 +77,9 @@ public class gui extends JFrame {
 		panel.setLayout(new CardLayout(0, 0));
 		
 		imageLabel = new JLabel("");
-		imageLabel.setIcon(new ImageIcon("C:\\Users\\SabouhS\\Documents\\Dante\\trunk\\spoc.png"));
+		File file2 = new File("spoc.png");
+        BufferedImage image2 = ImageIO.read(file2);
+		imageLabel.setIcon(new ImageIcon(image2));
 		panel.add(imageLabel, "name_1382540049281029");
 		
 		lblPowerRangers = new JLabel("GENESIS");
@@ -89,20 +92,17 @@ public class gui extends JFrame {
 		amountText.setColumns(10);
 		contentPane.add(amountText, "cell 2 6 4 1,growx");
 		
+		
+		
 		final generator gen = new generator();
 		
 		count = new JButton("Generate");
 		count.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					try{
-						Integer.parseInt(amountText.getText());
-						amount = amountText.getText();
-					}catch(NumberFormatException e){
-						amountText.setText("ONLY NUMBERS!");
-					}
-
-			        Calendar cal = Calendar.getInstance();
+					Integer.parseInt(amountText.getText());
+					amount = amountText.getText();
+					Calendar cal = Calendar.getInstance();
 			        
 			        int mm = cal.get(Calendar.MONTH)+1;
 			        String month = "0";
@@ -117,6 +117,9 @@ public class gui extends JFrame {
 					gen.createSerial(month, day, year, amount);
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				}
+				catch(NumberFormatException e){
+					amountText.setText("ONLY NUMBERS!");
 				}
 			}
 		});
